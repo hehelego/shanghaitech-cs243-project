@@ -1,15 +1,30 @@
+\subsection{background}
+
+The establishment of huge social network such as Tiktok, Wechat and Weibo has bring both challenges and opportunity.
+Leveraging the connectivity of social network to promote social welfare has become a fruitful area of study in algorithmic game theory research , particularly since the publication of \cite{mechanism-design-in-social-network} in 2017.
+
+Our project aims to develop a mechanism for facilitating general trading activity within social networks.
+
+\subsection{prior work}
+
+Initially, our research focused on distributed mechanisms that could be executed without prior knowledge of the network structure and without requiring a central authority to enforce the allocation.
+In this regard, \cite{SRA} proposed the Sequential Resale Auction (SRA) mechanism for selling a single item with Ex-post Incentive Compatibility (EPIC) property.
+Although SRA provides a sufficient solution for single-source single-item auction problems in distributed network settings,
+realistic trading scenarios are often more complex than the settings of SRA.
+For example, the network may contains multiple sellers who are willing to trade an item with potential buyers.
+This requires a distributed double auction mechanism to be properly addressed.
+
+However, after a brief literature review, we found that developing a double auction mechanism for social networks is a challenging task.
+Even a centralized truthful mechanism for double auctions on general networks has yet to be developed.
+As a result, we changed the direction of our research to focus on inventing a centralized mechanism.
+
+\subsection{related work}
+
+\cite{DNA} is the only paper that covers double auctions on a network. However, the mechanism proposed in that paper relies on unrealistic assumptions.
+Specifically, it assumes that the graph of buyers can be decomposed into disjoint groups, which is unlikely to hold in modern social networks that are characterized by strong connectivity.
+Therefore, we need to derive a mechanism that works for more general network structures.
+
+
+\subsection{overall plan for research}
+
 The overall plan for approaching the problem will involve conducting a literature review to establish connections between single seller mechanisms and our current multiple seller model, and using this information to develop a new mechanism that is suitable for our needs. The mechanism will then be subject to theoretical analysis using small test cases to verify key properties such as individual rationality (IR), incentive compatibility (IC), and weak budget balance (WB). Empirical evaluation will be conducted under different problem backgrounds in real life, using appropriate evaluation metrics to measure the mechanism's performance. Insights gained from the theoretical and empirical evaluations will be used to fine-tune and optimize the mechanism. Finally, the findings will be summarized and conclusions drawn about the mechanism's effectiveness, along with recommendations for future research in the field.
-
-
-
-
-
-In recent years, research on double auctions has gained significant attention in the fields of economics and computer science. With the emergence of electronic markets, computer scientists are increasingly involved in the development of new market systems. Double auction markets can be viewed as centralized markets with specific trading rules where buyers and sellers conduct transactions according to regulations. A key issue in double auction research is to find a dominant strategy that allows sellers and buyers to genuinely report their respective valuations of merchandise.
-
-In traditional double auction theory, we generally consider a fixed market consisting of buyers and sellers. However, in social networks, the absence of an effective double auction mechanism to facilitate the dissemination of information may lead to high valuation potential buyers missing out on auction information. Moreover, in traditional auctions, increasing profits for sellers and improving social welfare are usually two conflicting goals. By introducing the concept of social networking, we can motivate buyers who originally participated in the auction market to invite more potential buyers in the network to join, thus addressing both conflicting goals in traditional auctions simultaneously. It is crucial to design an auction mechanism that can achieve both advantages in social networks. However, the introduction of social networks means that we need to encourage buyers to not only report their merchandise valuations honestly but also disseminate auction information in social networks.
-
-In this paper, we propose a novel scenario considering a social network with numerous interconnected sellers and buyers who conduct double auctions and incentivize buyers to invite neighbors to participate in the auction. Unlike existing research, our scenario focuses on intersecting buyer groups and the interconnections between buyers. This implies that a buyer may belong to multiple buyer groups simultaneously. Our goal is to find a double auction mechanism that motivates all buyers to invite other potential buyers in the social network while maintaining the advantages of traditional mechanisms, which cannot be achieved under existing mechanisms.
-
-To address this issue, we first design a new double auction model in which buyers can interact with their neighbors in the social network and share auction information. In this model, we specifically focus on intersecting buyer groups and the mutual connections between buyers. Next, we propose and analyze a new auction mechanism that possesses incentive compatibility (IC) in the social network, meaning that honestly reporting true valuations is the optimal strategy for participants. We also study the performance of this mechanism in handling intersecting buyer groups, including aspects such as social welfare and budget balance.
-
-To validate the effectiveness of our proposed auction mechanism, we prove its incentive compatibility through theoretical analysis. In addition, we conduct a series of simulation experiments to evaluate the performance of the mechanism under various conditions. The experimental results show that our auction mechanism achieves relatively high social welfare while maintaining budget balance when dealing with intersecting buyer groups, thereby addressing the two conflicting goals in traditional auctions to a certain extent.
