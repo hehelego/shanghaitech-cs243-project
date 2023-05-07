@@ -1,9 +1,89 @@
-We consider a double auction market of $n+m$ participants.
-$n$ out of the $n+m$ participants are sellers while the rest of $m$ participants are buyers.
-Let $S=\{s_1,s_2,\ldots, s_n\}$ and $B=\{b_1,b_2,\ldots b_m\}$ be the set of all sellers and buyers.
-Each seller $s_i\in S$ is holding a one-unit item and is willing to sell it at price no lower than $v^b_i$.
-Each buyer $b_j\in B$ wants to purchase one item with price no more than $v^b_j$.
-Every participant of the market is connected to some other participants forming a social network.
-More precisely, every seller or buyer $x\in S\cup B$ can only communicate directly with its neighbors $r_x\subseteq (S\cup B\setminus \{x\})$.
+Consider a double auction market of $n+m$ participants
+where $n$ out of them are sellers and the rest $m$ participants are potential buyers. Let $S=\{s_1,s_2,\ldots, s_n\}$ and $B=\{b_1,b_2,\ldots b_m\}$ be the set of all sellers and buyers.
+Each seller $s_i\in S$ is holding a one-unit item and is willing to sell it at price no lower than $v^s_i$. Each buyer $b_j\in B$ wants to purchase one item with price no more than $v^b_j$.
+
+Every participant of the market is connected to some other participants forming a social network. More precisely, every seller or buyer $x\in S\cup B$ can only communicate directly with its neighbors $r_x\subseteq (S\cup B\setminus \{x\})$.
+Initially, only part of the buyers (called head buyers) are aware of the incoming auction.
+Head buyers are those who is directly linked to a seller.
+$H = \bigcup_{s_i \in S} (r_x \cap B)$ denotes all the head buyers in the market.
 
 
+To sell the item at higher price, the sellers want to invite potential buyers other than the initial ones i.e, the head buyers, to expand the auction.
+However, once neighboring potential buyers are invited to the auction, they will compete with the initial buyers for the items. Intuitively, a buyer has incentive to keep his neighboring buyers from entering the market.
+Therefore, the market owner must adopt a mechanism encouraging the buyers in the market to inform the neighbors not being aware of the auction.
+
+A mechanism for double auction on social network requires the buyers and the sellers to report their private information and decide the allocation of items and payment for each agent.
+For the sellers, the mechanism asks them to reveal their expected price $\hat v^s=(\hat v^s_1,\hat v^s_2,\ldots \hat v^s_n)$.
+The mechanism also requires the buyers to report their type $\hat\theta_i = (\hat v^b_i, \hat r_{s_i})$ and use $\hat\theta = (\hat\theta_1,\hat\theta_2,\ldots,\hat\theta_m)$ to denote a reported type profile.
+
+After receiving the reported information $\hat\theta$ and $\hat v^s$, the mechanism determines the allocation $\pi^s,\pi^b$ and the payment $p^s,p^b$.
+\begin{itemize}
+	\item For each seller $s_i$:
+		The allocation $\pi^s_i = 1$ means that he can trade the item with a buyer, otherwise $\pi^s_i = 0$.
+		The payment $p^s_i\leq 0$ gives the money $s_i$ can get from the market owner.
+	\item For each buyer $b_i$:
+		The allocation $\pi^b_i = 1$ indicates that he get one item from a seller while $\pi^b_i=0$ if he get no item.
+		The payment $p^b_i>0$ if $b_i$ is asked to pay money to the market owner
+		and $p^b_i<0$ when $b_i$ can get get some rewards from the market owner.
+\end{itemize}
+
+
+We make a few definition of properties for further discussion.
+
+\begin{definition}[active buyers]
+	Given a profile $\hat\theta$, we say buyer $b_i$ is active
+	if there exists $q_1,q_2,\ldots q_k in [1,n]$ such that
+	$b_{q_1}\in H$ is a head buyer, $b_{q_k}=b_i$ is the active buyer and
+	$b_{q_{i+1}} \in \hat r_{b_{q_i}}$ for every $i=1,2\ldots k-1$.
+	That is a buyer is active if he is a head buyer or an active buyer invites him.\\
+	Let $Q\subseteq B$ be the set of all active buyers.
+\end{definition}
+
+Next we definition the desired properties of the mechanism.
+
+\begin{definition}[valid]
+	A mechanism is valid if for all possible input of $(\hat\theta,\hat v^s)$ the following conditions are satisfied.
+	\begin{itemize}
+		\item If $b_i\not\in Q$ then $\pi^b_i=p^b_i=0$.
+		\item $\sum_{b_i\in B} \pi^b_i = \sum_{s_i\in S} \pi^s$.
+	\end{itemize}
+\end{definition} 
+
+\begin{definition}[utility]
+	The utility is the welfare an agent gains from participanting the double auction mechanism trading.
+	\begin{itemize}
+		\item For $b_i\in B$, his utility is $u^b_i = \pi^b_i v^b_i-p^b_i$.
+		\item For $s_i\in S$, his utility is $u^s_i = \pi^s_i v^s_i-p^s_i$.
+	\end{itemize}
+\end{definition}
+
+\begin{definition}[individual rational (IR)]
+	A mechanism is IR if for all possible input of $(\hat\theta,\hat v^s)$,
+	\begin{itemize}
+		\item For all $b_i\in B$, $u^b_i((\theta_i,\hat\theta_{-i}),\hat v^s)\geq 0$.
+		\item For all $s_i\in S$, $u^s_i(\hat\theta,(v^s_i, \hat v^s_{-i})\geq 0$.
+	\end{itemize}
+	That is, no agent is punished for participating truthfully.
+\end{definition}
+
+\begin{definition}[incentive compatible (IC)]
+	A mechanism is IC if
+	\begin{itemize}
+		\item For all $b_i\in B$,
+			$u^b_i((\theta_i,\hat\theta_{-i}),\hat v^s)
+			\geq u^b_i(\hat\theta,\hat v^s)$.
+		\item For all $s_i\in S$,
+			$u^s_i(\hat\theta,(v^s_i,\hat v^s_{-i}))
+			\geq 
+			u^s_i(\hat\theta,\hat v^s)$
+	\end{itemize}
+	That is, an agent's utility is maximized when he participate truthfully.
+\end{definition}
+
+\begin{definition}[weak budget balance (WBB)]
+	A mechanism is WBB if
+	$\sum_{s_i\in S} p^s_i(\hat\theta,\hat v^s)
+	+\sum_{b_i\in B} p^b_i(\hat\theta,\hat v^s) \geq 0$
+	for all $(\hat\theta,\hat v^s)$.
+	That is, the market owner never pay extra money for running the mechanism.
+\end{definition}
