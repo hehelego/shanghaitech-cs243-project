@@ -1,0 +1,98 @@
+\documentclass[format=acmsmall, review=false, natbib=false]{acmart}
+\usepackage{acm-ec-23}
+
+\usepackage{biblatex} %Imports biblatex package
+\addbibresource{ref.bib} %Import the bibliography file
+
+\usepackage[ruled]{algorithm2e} % For algorithms
+\renewcommand{\algorithmcfname}{ALGORITHM}
+\SetAlFnt{\small}
+\SetAlCapFnt{\small}
+\SetAlCapNameFnt{\small}
+\SetAlCapHSkip{0pt}
+\IncMargin{-\parindent}
+
+% Choose a citation style by commenting/uncommenting the appropriate line:
+
+% Title. Note the optional short title for running heads. In the interest of anonymization, please do not include any acknowledgements.
+\title{Project Proposal for Team$\#$6}
+
+% Anonymized submission.
+\author{Jintian Hu (2020533167), Huizhe Su (2020533009), Cheng Peng (2020533068), Liyu Yang (2020533162), Weiming Luo (2020533168)}
+
+% Abstract. Note that this must come before \maketitle.
+
+\begin{document}
+
+% Title page for title and abstract only.
+% \begin{titlepage}
+\maketitle
+% \end{titlepage}
+
+% Paper body
+\section{Topic: Generalized distributed auction on social networks}
+Our research topic lies in the field of auction mechanism design on social networks.
+A seller trys to sell one or more items through the network, and all the agents are potential buyers.
+Each agent is connected to a subset of other agents, and, if the agent has participanted in the auction, 
+it can invite its neighbors to the auction. With more agents, the seller will be more likely 
+to sell the item with a higher price. However, agents are also competitors, so we have to design proper incentives
+for them to inivte their neighbors.\par
+Many centralized mechanisms have been proposed, but distributed mechanisms are still rare.
+Our study will be based on Haoxin Liu's work, which lays the foundation for 
+distributed mechanism design on social networks. Our work will be focused on generalizing Haoxin's work 
+or exploring more properties of the proposed algorithms.
+
+\section{Motivation}
+% E.g., why is this topic/problem interesting?...
+
+Previously designed mechanisms on social network 
+require a centralized trustworthy executor to implement, exposing the privacy of agents to perilous situtaion.
+To provide privacy security gurantee, the mechanism needs to be decentralized,
+eliminating the need of trusted authority or a reliable thrid-party.
+
+Research in decentralized mechansims is still in a primitive phase where various issues are not settled.
+
+The first fully distributed mechanism \cite{liu2023distributed} has been proposed, however it is only solves single item auction.
+Extension for general cases such as selling homogeneous items or combinatorial auction remains to be tackled.
+Properties of the proposed mechanism are also not fully expolred yet.
+
+Sybil-proofness \cite{stannat2021achieving} is another concern in social network-based mechanism design. 
+It means avoiding buyers from creating fake nodes in social networks to improve their utilities,
+which determines whether an mechanism can be effectively applied in reality.
+Whether the first fully distributed mechanism is sybil-proofness,
+and if not, how to design a sybil-proofness distributed mechanism,
+are still questions to be answered.
+
+\section{Research Questions}
+% E.g., after exploring and reading papers, what is the problem that you will be investigating? Why is it interesting? How is your problem related to your reading? Are there any differences?
+There are several appealing research directions:
+\begin{enumerate}
+    \item Current works only consider auctions with single item. It may be a simple extension that homogeneous items are sold with single-unit demand for each buyer. Models in which buyers with diminish valuation can also be considered.
+    \item In reality, the participants are likely to suffer from some penalty when spreading the information and reselling the item, which brings about a diffusion cost. We may add this constraint to the existing distributed mechanism to see if we can reveal some interesting features. 
+    \item Sybil attack is a common problem faced by most of the distributed system. We can evaluate the vulnerability to the newly proposed distributed mechanism and, if possible, give a sybil-proof modification.
+\end{enumerate}
+
+More specifically, the following  questions need to be addressed:
+\begin{enumerate}
+    \item How to design completely decentralized mechanisms for selling homogeneous items?
+    \item What extension to the existing mechanisms can compensate the diffusion cost so that agents are willing to invite their neighbours?
+    \item Whether or not an agent has an incentive to create fake identities? If it has, how to design a sybil-proof mechanism?
+\end{enumerate}
+
+\section{Plan}
+% E.g., what method are you planning to use? What is the novelty?
+
+The primary research methods for this study is literature review, mathematical modeling and theoretical analysis. 
+We will first reveiw various literatures related to the above three directions,
+which will allow us to choose one directions and define a more specific research question. 
+By the end of week 9, we will write a comprehensive literature review on our selected topic. 
+In the next stage, a formal model will be devised based on the review.
+By the end of week 13, we will finish our milestone report where some preliminary solutions to the research questions will be proposed. 
+We may carry out a simulation to verify it if an applicable result is derived before week 16.
+The final report will be finished before the semester ends.
+
+
+
+\nocite{*}
+\printbibliography
+\end{document}
